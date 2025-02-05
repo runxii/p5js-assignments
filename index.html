@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Drawing Tools</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="libraries/p5.min.js"></script>
+    <!-- <script src="libraries/p5.brush.min.js"></script> -->
+
+    <!--integrating with drawing tools js-->
+
+    <script src="sketch.js"></script>
+    
+    
+  </head>
+
+  <body>
+    <div class="header"><h1>DRAWING TOOLS - p5.js</h1></div>
+    <div class="pg-w-sidebar">
+      <div class="sidebar" id="toolbox-bar">
+        <ul>
+          <li><button id="brush-tool" title="brush"><i class="fa fa-paint-brush"></i></button></li>
+          <li><button id="pencil-tool" title="pencil"><i class="fa fa-pencil"></i></button></li>
+          <li><button id="marker-tool" title="marker"><i class="fa fa-tint"></i></button></li>
+          <li><button id="eraser-tool" title="eraser"><i class="fa fa-eraser"></i></button></li>
+          <li><button id="clear-tool" title="clear"><i class="fa fa-trash-o"></i></button></li>
+          <li><button id="save-tool" title="save"><i class="fa fa-save"></i></button></li>
+          <li><button id="image-tool" title="image"><i class="fa fa-image"></i></button></li>
+          <li><button id="color-tool" title="Color Picker"><div class="circle" id="color-show"></div></button></li>
+          <li><button id="weight-down" title="Weight Minus"><i class="fa fa-minus"></i></button></li>
+          <li><button id="weight-show" title="Stroke Weight"></button></li>
+          <li><button id="weight-up" title="Weight Plus"><i class="fa fa-plus"></i></button></li>
+        </ul>
+      </div>
+      <div id="board"></div>
+    </div>
+  </body>
+</html>
