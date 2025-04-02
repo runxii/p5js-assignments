@@ -9,11 +9,20 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 
     <script src="libraries/p5.min.js"></script>
-    <script src="libraries/p5.sound.min.js"></script>
+    <script src="sketch.js"></script>
+    
   </head>
 
   <body>
-    <script src="sketch.js"></script>
-    <button id="image-tool">import image</button>
+    <div class="pg-w-sidebar">
+      <div class="sidebar" id="toolbox-bar">
+        <ul>
+          <li><button id="import">import image</button></li>
+          <li><button id="clear">clear canvas</button></li>
+          <li><button id="save">save image</button></li>
+        </ul>
+      </div>
+      <div id="board"><p id="filter-label" style="width:800px;"></p></div>
+    </div>
   </body>
 </html>

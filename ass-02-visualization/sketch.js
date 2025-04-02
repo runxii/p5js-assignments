@@ -49,6 +49,7 @@ function setup() {
   income = table.getColumn('income');
   health = table.getColumn('health');
   population = table.getColumn('population');
+  console.log(min(income),max(income));
 }
 
 function drawAxes() {
@@ -142,6 +143,7 @@ function draw() {
   drawLegend();
   for(let i=0;i<totalCountries;i++){
     x=logMap(income[i],min(income),max(income),55,width-55);
+    //x=map(income[i],min(income),max(income),55,width-55);
     y=map(health[i],30,90,height-20,20);
     r=sqrtMap(population[i],min(population),max(population),10,100)/1.2;
     if(hovered(r,x,y)){

@@ -1,0 +1,102 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  font-family: 'Epilogue', sans-serif;
+  background-color: #191C1A;
+  color: white;
+  scroll-behavior: smooth;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: url('img/nav-bar.png'); /* placeholder for navbar bg */
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem 0;
+  z-index: 100;
+}
+
+.nav-button {
+  font-family: 'Fira Mono', monospace;
+  font-size: 20px;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 0.4rem 1rem;
+  margin: 0 0 0 0.5rem;
+  border-radius: 20px;
+  color: #000;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.nav-button:hover {
+  background:rgba(255, 255, 255,0.9)
+}
+
+.nav-button:first-child {
+  margin-left: 5rem;
+}
+
+.nav-icon {
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2); /* placeholder for icon */
+  border-radius: 50%;
+  position:fixed;
+  right:0.5rem;
+}
+
+.main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  background-color: #191C1A;
+  transition: all 0.6s ease-in-out;
+}
+
+.main-title {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.main-title h1 {
+  font-family: 'Epilogue', sans-serif;
+  font-weight: 300;
+  font-size: 10rem;
+  color: white;
+  margin: 2rem;
+  
+}
+
+.main-divider {
+  display: flex;
+  justify-content: center;
+}
+
+.divider {
+  width: 80%;
+  height: 4px;
+  background-image: url('img/divider.png'); 
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 2rem;
+  transition: all 0.5s ease-in-out;
+}
+
+.canva {
+  width:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Fira Mono', monospace;
+  font-size: 2rem;
+  transition: all 0.6s ease-in-out;
+}

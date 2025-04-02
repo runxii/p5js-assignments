@@ -1,8 +1,44 @@
 html, body {
   margin: 0;
   padding: 0;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 canvas {
   display: block;
+}
+
+.pg-w-sidebar {
+  display:flex;
+  flex-direction: row;
+}
+
+.sidebar{
+  width: 10vw;
+}
+
+.sidebar ul li {
+  list-style-type: none;
+  padding: 20px;
+}
+
+#board {
+  margin-left:12vw;
+  width: 70%;
+}
+
+button,p {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: black;
+	color: white;
+	border: none;
+	padding: 15px 30px;
+	cursor: pointer;
+	font-size: 14px;
+	border-radius: 20px;
+	transition: all 0.3s;
+}
+
+button:hover {
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
 }
