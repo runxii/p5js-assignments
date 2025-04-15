@@ -10,6 +10,16 @@ let textureOffset = 25;
 
 let branches = [];
 
+let flowerImgs = [
+  "img/bud-left.png",
+  "img/bud-right.png",
+  "img/full-bloom.png",
+  "img/half-bloom-left.png",
+  "img/half-bloom-right.png",
+];
+
+let flowerPlaced = false;
+
 function setup() {
   let boardCanvas = createCanvas(windowWidth-20, canvaHeight);
   boardCanvas.parent("canva");
@@ -29,12 +39,44 @@ function windowResized(){
   background(bg);
 }
 
+
+// 判断所有分支都长完了
+// function allBranchesGrown() {
+//   return branches.every(b => b.finished);
+// }
+
+function placeFlowers() {
+  for (let b of branches) {
+    if (b.children.length === 0) {
+      let end = p5.Vector.add(b.pos, p5.Vector.mult(b.dir, b.targetLen));
+      let screenPos = end.copy(); // 不使用 screenPosition()
+
+      let imgSrc = random(flowerImgs);
+      let flowerSize = random(10, 30);
+
+      let img = createImg(imgSrc, "");
+      img.size(flowerSize, flowerSize);
+      img.position(screenPos.x - flowerSize / 2, screenPos.y - flowerSize / 2);
+      img.style('position', 'absolute');
+      img.style('pointer-events', 'none');
+      img.style('z-index', '100');
+    }
+  }
+}
+
 function draw() {
   background(bg);
   for (let b of branches) {
     b.update();
     b.show();
   }
+
+  if (!flowerPlaced) {
+    console.log("all branches grown");
+    placeFlowers();
+    flowerPlaced = true;
+  }
+
 }
 
 class Branch {
