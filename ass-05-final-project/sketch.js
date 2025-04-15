@@ -9,16 +9,7 @@ let startLen = 200;
 let textureOffset = 25;
 
 let branches = [];
-
-let flowerImgs = [
-  "img/bud-left.png",
-  "img/bud-right.png",
-  "img/full-bloom.png",
-  "img/half-bloom-left.png",
-  "img/half-bloom-right.png",
-];
-
-let flowerPlaced = false;
+let flowerPos = [];
 
 function setup() {
   let boardCanvas = createCanvas(windowWidth-20, canvaHeight);
@@ -71,13 +62,19 @@ function draw() {
     b.show();
   }
 
-  if (!flowerPlaced) {
-    console.log("all branches grown");
-    placeFlowers();
-    flowerPlaced = true;
+  // Display flowers at saved positions
+  for (let pos of flowerPos) {
+    drawFlower(pos.x, pos.y);
   }
 
 }
+
+
+function drawFlower(x, y) {
+  fill('pink');
+  ellipse(x, y, 10, 10); // Simple flower representation
+}
+
 
 class Branch {
   constructor(pos, dir, len, depth = 0, parentEndThickness) {
@@ -90,7 +87,7 @@ class Branch {
     this.depth = depth;
 
     
-    // 粗细控制
+    // controls the thickness of branches, tip's thinner
     this.startThickness = parentEndThickness;
     this.falloffFactor = 0.4;
     this.endThickness = this.startThickness * this.falloffFactor;
@@ -98,13 +95,18 @@ class Branch {
     this.noiseOffset = random(1000); // for unique noise per branch
   }
 
+  // 4 layers in total, when the branch reaches target length. grow finished
   update() {
     if (this.currentLen < this.targetLen) {
       this.currentLen += growSpeed;
+      flowerPos.push(this.pos.copy());
     } else if (!this.finished && this.depth < 4) {
       this.spawnChildren();
       this.finished = true;
+      flowerPos.push(this.pos);
     }
+    
+
     for (let child of this.children) {
       child.update();
     }
@@ -125,6 +127,8 @@ class Branch {
     for (let i = 0; i < steps; i++) {
       let t = i / steps;
       let length = this.currentLen * t;
+
+      // create trees with curves and little offset rather than the straight stick
       let p = p5.Vector.add(base, p5.Vector.mult(this.dir, length));
       let angle = atan2(this.dir.y, this.dir.x) + PI / 2;
       let n = noise(p.x * 0.01, p.y * 0.01, this.noiseOffset);
@@ -134,11 +138,12 @@ class Branch {
       let y1 = p.y + sin(angle) * offset;
 
       //let thickness = map(1 - t, 0, 1, 2, 5) * (1 - this.depth * 0.1);
-      // 从 startThickness 过渡到 endThickness
+      // let last level's end thickness be the next level's start thickness, to keep the consistency
       let thickness = lerp(this.startThickness, this.endThickness, t);
       noStroke();
       fill(branchColor);
       circle(x1, y1, thickness);
+      // Check if this branch is a leaf node
     }
   }
 
@@ -150,7 +155,8 @@ class Branch {
       let newDir = this.dir.copy().rotate(angle).normalize();
       newDir.y = constrain(newDir.y, -1, -0.1);
       let newLen = this.targetLen * random(0.6, 0.9);
-      // 把当前分支的 endThickness 作为下一层的 startThickness 传下去
+
+      // pass the thickness to next level
       let child = new Branch(end, newDir, newLen, this.depth + 1, this.endThickness);
       this.children.push(child);
       branches.push(child);
